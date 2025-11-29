@@ -1,0 +1,8 @@
+venv/
+.venv-pth-backup/
+__pycache__/
+*.pyc
+.env
+.DS_Store
+.vscode/
+*.egg-info/
