@@ -1,0 +1,40 @@
+# {{event_title}} — IndigiRise Accelerator
+
+## Purpose
+{{purpose}}
+
+## Event Overview
+{{overview}}
+
+## Agenda
+{{agenda}}
+
+## Pitch Criteria
+{{criteria}}
+
+## Judges & Panelists
+{{judges}}
+
+## Prizes & Recognition
+{{prizes}}
+
+## Registration & Participation
+{{registration}}
+
+## Logistics & Venue
+{{logistics}}
+
+## Sponsors & Partners
+{{sponsors}}
+
+## Communications & Marketing
+{{marketing}}
+
+## Team Roles
+{{team_roles}}
+
+## Post-Event Follow-up
+{{post_event}}
+
+## Additional Notes
+{{notes}}

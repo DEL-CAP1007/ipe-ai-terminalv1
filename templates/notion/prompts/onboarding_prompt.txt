@@ -1,0 +1,18 @@
+Fill in the following client onboarding sections. Write in a professional, culturally grounded IPE tone. Assume this project aligns with Indigenous Projects & Events and the IndigiRise Accelerator ecosystem.
+
+Return key: value format.
+
+client_name:
+overview:
+scope:
+deliverables:
+timeline:
+team:
+communication:
+meetings:
+materials:
+payment:
+protocols:
+folders:
+internal_notes:
+next_steps:

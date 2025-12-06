@@ -1,0 +1,11 @@
+Fill in the following fields for a full task and timeline breakdown for the project listed. Use operations language, priority sorting, clear deliverables, and realistic timelines. Assume the project is managed under Indigenous Projects & Events and the IndigiRise Accelerator ecosystem.
+
+Return in key: value format.
+
+project_title:
+summary:
+high_priority:
+medium_priority:
+low_priority:
+timeline:
+notes:

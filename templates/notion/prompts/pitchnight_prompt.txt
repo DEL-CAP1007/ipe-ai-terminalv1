@@ -1,0 +1,18 @@
+Fill in the following sections for an IndigiRise Accelerator Pitch Night event. Use IPE and IndigiRise Accelerator tone: culturally grounded, professional, community-first, ceremony-aware, trauma-informed, and clear for operations. Write detailed paragraphs or bullet points for each.
+
+Return the response in key: value format.
+
+event_title:
+purpose:
+overview:
+agenda:
+criteria:
+judges:
+prizes:
+registration:
+logistics:
+sponsors:
+marketing:
+team_roles:
+post_event:
+notes:

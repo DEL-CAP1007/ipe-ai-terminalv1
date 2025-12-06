@@ -1,0 +1,34 @@
+# {{program_title}}
+
+## Program Overview
+{{overview}}
+
+## Indigenous Knowledge Focus
+{{knowledge_focus}}
+
+## Learning Outcomes
+{{learning_outcomes}}
+
+## Cultural Teachings
+{{teachings}}
+
+## Classroom Activities
+{{activities}}
+
+## Schedule (Time Breakdown)
+{{schedule}}
+
+## Materials Needed
+{{materials}}
+
+## Facilitator Roles
+{{facilitators}}
+
+## Safety & Protocols
+{{safety}}
+
+## Budget Summary
+{{budget}}
+
+## Additional Notes
+{{notes}}

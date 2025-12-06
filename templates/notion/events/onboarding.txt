@@ -1,0 +1,40 @@
+# {{client_name}}
+
+## Overview
+{{overview}}
+
+## Scope of Work
+{{scope}}
+
+## Deliverables
+{{deliverables}}
+
+## Timeline & Milestones
+{{timeline}}
+
+## Team Assignments
+{{team}}
+
+## Communication Plan
+{{communication}}
+
+## Meeting Schedule
+{{meetings}}
+
+## Required Materials
+{{materials}}
+
+## Payment & Funding Structure
+{{payment}}
+
+## Cultural Protocols
+{{protocols}}
+
+## Folder & File Structure
+{{folders}}
+
+## Internal Notes
+{{internal_notes}}
+
+## Next Steps
+{{next_steps}}

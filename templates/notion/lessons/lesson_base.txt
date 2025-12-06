@@ -1,0 +1,34 @@
+# {{lesson_title}}
+
+## Overview
+{{overview}}
+
+## Key Teachings
+{{key_teachings}}
+
+## Cultural Foundations
+{{cultural_foundations}}
+
+## Learning Objectives
+{{learning_objectives}}
+
+## Time Breakdown
+{{time_breakdown}}
+
+## In-Class Activities
+{{activities}}
+
+## Reflection Questions
+{{reflection_questions}}
+
+## Homework
+{{homework}}
+
+## Facilitator Notes
+{{facilitator_notes}}
+
+## Slide Outline
+{{slide_outline}}
+
+## Integration Notes
+{{integration_notes}}

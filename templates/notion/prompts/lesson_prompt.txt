@@ -1,0 +1,18 @@
+Fill in the following fields for an IndigiRise lesson. Use culturally grounded language, trauma-aware instruction, and keep notes clear for a facilitator. Keep all sections as paragraphs or bullet points.
+
+Return your answer in the format:
+key: value
+
+Fields to fill:
+lesson_title:
+overview:
+key_teachings:
+cultural_foundations:
+learning_objectives:
+time_breakdown:
+activities:
+reflection_questions:
+homework:
+facilitator_notes:
+slide_outline:
+integration_notes:

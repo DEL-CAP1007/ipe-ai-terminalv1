@@ -1,0 +1,21 @@
+
+This proposal is for the IndigiRise Accelerator program and its associated events.
+
+Fill in the following sections for an event proposal. Write in a professional, culturally grounded IPE tone. Use event planning, Indigenous community, and reconciliation language. Keep answers detailed.
+
+Return your answer in key: value format.
+
+proposal_title:
+event_overview:
+objectives:
+cultural_approach:
+vision_outcomes:
+scope_of_work:
+deliverables:
+agenda:
+timeline:
+budget:
+sponsorship:
+team_partners:
+logistics:
+next_steps:

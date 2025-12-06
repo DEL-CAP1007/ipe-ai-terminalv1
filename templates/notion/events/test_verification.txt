@@ -1,0 +1,46 @@
+# IPE Machine System Verification
+
+This checklist is automatically generated to confirm that your reciprocal relations and core automations are working correctly.
+
+## Items Created Automatically
+- Test Event
+- Test Task
+- Test Onboarding
+- Test K12 Program
+- Test Speaker
+
+## What to Check in Notion
+
+### 1. Events ↔ Clients
+- Go to "IPE Events"
+- Open "Test Event – System Check"
+- Ensure the Client relation is visible
+- Go to "IPE Clients"
+- Ensure the reciprocal "Events" relation shows the test event
+
+### 2. Events ↔ Speakers
+- Go to "IPE Events"
+- Ensure Speakers / Facilitators shows the test speaker
+- Go to "IndigiRise Speakers & Facilitators"
+- Ensure the reciprocal "Events" relation shows the test event
+
+### 3. Events ↔ Tasks
+- Go to "IPE Tasks"
+- Ensure the Event relation points to the test event
+- Go to "IPE Events"
+- Ensure the reciprocal "Tasks" relation shows the test task
+
+### 4. Clients ↔ K12 Programs
+- Go to "K12 Indigenous Programs"
+- Ensure Clients shows the test client
+- Go to "IPE Clients"
+- Ensure Programs shows the test K12 program
+
+### 5. K12 Programs ↔ Speakers
+- Go to "K12 Indigenous Programs"
+- Ensure Lead Facilitator shows the test speaker
+- Go to "IndigiRise Speakers & Facilitators"
+- Ensure the reciprocal "K12 Programs" relation shows the test program
+
+## If All Checks Pass
+Your IPE Machine relational system is fully functional and ready for Phase 9.

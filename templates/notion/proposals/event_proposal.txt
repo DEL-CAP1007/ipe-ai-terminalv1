@@ -1,0 +1,40 @@
+# {{proposal_title}}
+
+## Event Overview
+{{event_overview}}
+
+## Purpose & Objectives
+{{objectives}}
+
+## Community & Cultural Approach
+{{cultural_approach}}
+
+## Vision & Outcomes
+{{vision_outcomes}}
+
+## Scope of Work
+{{scope_of_work}}
+
+## Deliverables
+{{deliverables}}
+
+## Agenda Overview
+{{agenda}}
+
+## Timeline
+{{timeline}}
+
+## Budget Summary
+{{budget}}
+
+## Sponsorship / Funding Model
+{{sponsorship}}
+
+## Team & Partners
+{{team_partners}}
+
+## Logistics & Planning
+{{logistics}}
+
+## Next Steps
+{{next_steps}}

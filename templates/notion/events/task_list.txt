@@ -1,0 +1,19 @@
+# Tasks for {{project_title}}
+
+## Summary
+{{summary}}
+
+## High Priority Tasks
+{{high_priority}}
+
+## Medium Priority Tasks
+{{medium_priority}}
+
+## Low Priority Tasks
+{{low_priority}}
+
+## Suggested Timeline
+{{timeline}}
+
+## Notes
+{{notes}}

@@ -1,0 +1,24 @@
+
+Fill in the following sections for a full event plan. Use IPE's tone: culturally grounded, professional, community-first, ceremony-aware, trauma-informed, and clear for operations. Write detailed paragraphs or bullet points for each.
+If the event is part of the IndigiRise Accelerator ecosystem, include relevant branding language.
+
+Return the response in key: value format.
+
+event_title:
+overview:
+vision:
+cultural_protocol:
+agenda:
+speakers:
+sessions:
+logistics:
+venue:
+registration:
+marketing:
+sponsorship:
+budget:
+timeline:
+vendors:
+team_roles:
+impact:
+post_event:

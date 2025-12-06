@@ -1,0 +1,18 @@
+
+Fill in the following sections for an Indigenous Speaker/Facilitator profile. Use culturally grounded and professional language. Assume this speaker works with Indigenous Projects & Events and the IndigiRise Accelerator ecosystem.
+
+Return your answer in key: value format.
+
+speaker_name:
+biography:
+identity:
+expertise:
+topics:
+teachings:
+offerings:
+availability:
+travel:
+contact:
+fees:
+media:
+notes:
