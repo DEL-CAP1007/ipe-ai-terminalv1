@@ -104,43 +104,51 @@ def build_event_properties(
 	"""
 	props: Dict[str, Any] = {}
 
-	# Name (title)
-	props["Name"] = {
+	# Event Name (title)
+	props["Event Name"] = {
 		"title": [
 			{"type": "text", "text": {"content": event_name}}
 		]
 	}
 
-	# Client (plain text for now; later you can convert to relation)
-	if client_name:
-		props["Client"] = {
-			"rich_text": [
-				{"type": "text", "text": {"content": client_name}}
-			]
-		}
+	# Client (relation, placeholder for automation)
+	props["Client"] = {"relation": []}
 
-	# Date of Event (Date property)
+	# Event Type (select)
+	props["Event Type"] = {"select": {"name": "Pitch Night"}}
+
+	# Status (select)
+	props["Status"] = {"select": {"name": "Planning"}}
+
+	# Date of Event (date)
 	if event_date:
-		props["Date of Event"] = {
-			"date": {
-				"start": event_date
-			}
-		}
+		props["Date of Event"] = {"date": {"start": event_date}}
+	else:
+		props["Date of Event"] = {"date": {"start": None}}
 
-	# Folder Path (text)
-	props["Folder Path"] = {
-		"rich_text": [
-			{"type": "text", "text": {"content": str(folder_path)}}
-		]
-	}
+	# Timeline Start (date)
+	props["Timeline Start"] = {"date": {"start": None}}
 
-	# Cloud Folder (text)
-	if cloud_folder:
-		props["Cloud Folder"] = {
-			"rich_text": [
-				{"type": "text", "text": {"content": cloud_folder}}
-			]
-		}
+	# Timeline End (date)
+	props["Timeline End"] = {"date": {"start": None}}
+
+	# Notes (rich_text)
+	props["Notes"] = {"rich_text": [{"type": "text", "text": {"content": ""}}]}
+
+	# Folder Path (url)
+	props["Folder Path"] = {"url": str(folder_path)}
+
+	# Cloud Folder (url)
+	props["Cloud Folder"] = {"url": cloud_folder if cloud_folder else ""}
+
+	# Relations (placeholders for automation)
+	props["Tasks"] = {"relation": []}
+	props["Clients"] = {"relation": []}
+	props["Speakers & Facilitators"] = {"relation": []}
+	props["Communication Log"] = {"relation": []}
+	props["Programs"] = {"relation": []}
+	props["Cohorts"] = {"relation": []}
+	props["Participants"] = {"relation": []}
 
 	return props
 

@@ -116,19 +116,26 @@ def create_task(task_name, parent_page_id, timeline_start=None, timeline_end=Non
         return None
     url = f"{BASE_URL}/pages"
     properties = {
-        "Name": {"title": [{"type": "text", "text": {"content": task_name}}]}
+        "Name": {"title": [{"type": "text", "text": {"content": task_name}}]},
+        "Status": {"select": {"name": "Not Started"}},
+        "Priority": {"select": {"name": "Medium"}},
+        "Category": {"select": {"name": "Event"}},
+        "Notes": {"rich_text": [{"type": "text", "text": {"content": ""}}]},
+        "Timeline Start": {"date": {"start": timeline_start.strftime("%Y-%m-%d") if timeline_start and hasattr(timeline_start, 'strftime') else str(timeline_start) if timeline_start else None}},
+        "Timeline End": {"date": {"start": timeline_end.strftime("%Y-%m-%d") if timeline_end and hasattr(timeline_end, 'strftime') else str(timeline_end) if timeline_end else None}},
+        "Duration Days": {"number": 0},
+        "Assigned To": {"people": []},
+        "Critical Task": {"checkbox": False},
+        "Folder Path": {"url": ""},
+        "Cloud Folder": {"url": ""},
+        "Program Type": {"select": {"name": "IndigiRise Accelerator"}},
+        "Event Type": {"select": {"name": "Pitch Night"}}
+        # Relations (Parent Event, Parent Program, Parent Cohort, Client, Speaker / Facilitator, Participant) can be added here if IDs are available
     }
-    # Accept timeline_start and timeline_end as datetime, convert to ISO if present
-    if timeline_start:
-        if hasattr(timeline_start, 'strftime'):
-            properties["Timeline Start"] = {"date": {"start": timeline_start.strftime("%Y-%m-%d")}}
-        else:
-            properties["Timeline Start"] = {"date": {"start": str(timeline_start)}}
-    if timeline_end:
-        if hasattr(timeline_end, 'strftime'):
-            properties["Timeline End"] = {"date": {"start": timeline_end.strftime("%Y-%m-%d")}}
-        else:
-            properties["Timeline End"] = {"date": {"start": str(timeline_end)}}
+    # Relations: Add as needed, e.g.:
+    # properties["Parent Event"] = {"relation": [{"id": parent_event_id}]}
+    # properties["Parent Program"] = {"relation": [{"id": parent_program_id}]}
+    # ...
     data = {
         "parent": {"type": "database_id", "database_id": db_id},
         "properties": properties
@@ -265,40 +272,152 @@ def generate_onboarding(client_name):
 
  # --- CLI Routing ---
 def run_notion(args):
+    if action == "setup-comm-log-properties":
+        db_name = "IPE Communication Log (Master)"
+        # 1. Assigned To
+        add_property(db_name, "Assigned To", "person")
+        # 2. Attachment
+        add_property(db_name, "Attachment", "files")
+        # 3. Communication Category
+        add_property(db_name, "Communication Category", "select")
+        # 4. Date
+        add_property(db_name, "Date", "date")
+        # 5. Interaction Type
+        add_property(db_name, "Interaction Type", "select")
+        # 6. Source Platform
+        add_property(db_name, "Source Platform", "select")
+        # 7. Summary / Notes
+        add_property(db_name, "Summary / Notes", "rich_text")
+        # 8. Next Step / Action Required
+        add_property(db_name, "Next Step / Action Required", "rich_text")
+        # 9. Time Logged
+        add_property(db_name, "Time Logged", "number")
+        # 10. Related Event (relation)
+        add_relation_property(db_name, "Related Event", "IPE Events (Master)")
+        # 11. Related Client (relation)
+        add_relation_property(db_name, "Related Client", "IPE Clients (Master)")
+        # 12. Cohorts (relation)
+        add_relation_property(db_name, "Cohorts", "IndigiRise Cohorts (Master)")
+        # 13. Participants (relation)
+        add_relation_property(db_name, "Participants", "IndigiRise Participants (Master)")
+        # 14. Programs (relation)
+        add_relation_property(db_name, "Programs", "K–12 Indigenous Programs (Master)")
+        # 15. Speakers & Facilitators (relation)
+        add_relation_property(db_name, "Speakers & Facilitators", "Speakers & Facilitators (Master)")
+        print("All properties for IPE Communication Log (Master) added. Add reverse relations manually in Notion UI if needed.")
+        return
+    if action == "setup-speakers-properties":
+        db_name = "Speakers & Facilitators (Master)"
+        # 1. Name (title)
+        # 2. Email
+        add_property(db_name, "Email", "email")
+        # 3. Phone
+        add_property(db_name, "Phone", "phone")
+        # 4. Region
+        add_property(db_name, "Region", "select")
+        # 5. Nation / Community
+        add_property(db_name, "Nation / Community", "rich_text")
+        # 6. Role
+        add_property(db_name, "Role", "select")
+        # 7. Type
+        add_property(db_name, "Type", "select")
+        # 8. Category
+        add_property(db_name, "Category", "select")
+        # 9. Biography
+        add_property(db_name, "Biography", "rich_text")
+        # 10. Photo
+        add_property(db_name, "Photo", "files")
+        # 11. Media Release on File?
+        add_property(db_name, "Media Release on File?", "checkbox")
+        # 12. Cultural Protocol Notes
+        add_property(db_name, "Cultural Protocol Notes", "rich_text")
+        # 13. Certifications
+        add_property(db_name, "Certifications", "rich_text")
+        # 14. Availability
+        add_property(db_name, "Availability", "rich_text")
+        # 15. Day Rate
+        add_property(db_name, "Day Rate", "number")
+        # 16. Session Rate
+        add_property(db_name, "Session Rate", "number")
+        # 17. Honoraria Provided
+        add_property(db_name, "Honoraria Provided", "checkbox")
+        # 18. Travel Requirements
+        add_property(db_name, "Travel Requirements", "rich_text")
+        # 19. Folder Path
+        add_property(db_name, "Folder Path", "url")
+        # 20. Cloud Folder
+        add_property(db_name, "Cloud Folder", "url")
+        # 21. Clients (relation)
+        add_relation_property(db_name, "Clients", "IPE Clients (Master)")
+        # 22. Programs (relation)
+        add_relation_property(db_name, "Programs", "K–12 Indigenous Programs (Master)")
+        # 23. Events (relation)
+        add_relation_property(db_name, "Events", "IPE Events (Master)")
+        # 24. Tasks (relation)
+        add_relation_property(db_name, "Tasks", "IPE Tasks (Master)")
+        # 25. Communication Log (relation)
+        add_relation_property(db_name, "Communication Log", "IPE Communication Log (Master)")
+        print("All properties for Speakers & Facilitators (Master) added. Add reverse relations manually in Notion UI if needed.")
+        return
+        if action == "setup-speakers-properties":
+            db_name = "Speakers & Facilitators (Master)"
+            # 1. Name (title)
+            # 2. Biography
+            add_property(db_name, "Biography", "text")
+            # 3. Indigenous Identity & Background
+            add_property(db_name, "Indigenous Identity & Background", "text")
+            # 4. Areas of Expertise
+            add_property(db_name, "Areas of Expertise", "multi_select")
+            # 5. Speaking Topics
+            add_property(db_name, "Speaking Topics", "multi_select")
+            # 6. Cultural Knowledge & Teachings
+            add_property(db_name, "Cultural Knowledge & Teachings", "text")
+            # 7. Workshop / Program Offerings
+            add_property(db_name, "Workshop / Program Offerings", "text")
+            # 8. Availability
+            add_property(db_name, "Availability", "text")
+            # 9. Travel Requirements
+            add_property(db_name, "Travel Requirements", "text")
+            # 10. Contact Info
+            add_property(db_name, "Contact Info", "text")
+            # 11. Fees
+            add_property(db_name, "Fees", "text")
+            # 12. Media Assets
+            add_property(db_name, "Media Assets", "files")
+            # 13. Additional Notes
+            add_property(db_name, "Additional Notes", "text")
+            print("All required and optional properties for Speakers & Facilitators (Master) added. Add relations manually in Notion UI.")
+            return
     if not args:
         print("Missing Notion action.")
         return
     action = args[0]
-    if action == "setup-participants-properties":
-        db_name = "IndigiRise Participants (Master)"
-        # 1. Name (already present as title)
+    if action == "setup-clients-properties":
+        db_name = "IPE Clients (Master)"
+        # 1. Name (title)
         # 2. Email
         add_property(db_name, "Email", "email")
         # 3. Phone Number
         add_property(db_name, "Phone Number", "phone")
-        # 4. Cohort (relation, manual)
-        # 5. Status
+        # 4. Status
         add_property(db_name, "Status", "status")
-        # 6. Assigned Tasks (relation, manual)
-        # 7. Communication Log (relation, manual)
-        # 8. Parent Event (relation, manual)
-        # 9. Program Type
+        # 5. Program Type
         add_property(db_name, "Program Type", "select")
-        # 10. Folder Path
+        # 6. Folder Path
         add_property(db_name, "Folder Path", "text")
-        # 11. Cloud Folder
+        # 7. Cloud Folder
         add_property(db_name, "Cloud Folder", "text")
-        # 12. Notes
+        # 8. Notes
         add_property(db_name, "Notes", "text")
-        # 13. Photo
+        # 9. Photo
         add_property(db_name, "Photo", "files")
-        # 14. Application Form Link
+        # 10. Application Form Link
         add_property(db_name, "Application Form Link", "url")
-        # 15. Progress Score (Internal)
+        # 11. Progress Score (Internal)
         add_property(db_name, "Progress Score (Internal)", "number")
-        # 16. Pitch Readiness Level
+        # 12. Pitch Readiness Level
         add_property(db_name, "Pitch Readiness Level", "select")
-        print("All required and optional properties for IndigiRise Participants (Master) added. Add relations manually in Notion UI.")
+        print("All required and optional properties for IPE Clients (Master) added. Add relations manually in Notion UI.")
         return
     if not args:
         print("Missing Notion action.")
@@ -335,32 +454,29 @@ def run_notion(args):
         return
     if action == "setup-cohorts-properties":
         db_name = "IndigiRise Cohorts (Master)"
-        # 1. Name (already present as title)
-        # 2. Status
-        add_property(db_name, "Status", "status")
+        # 1. Status
+        add_property(db_name, "Status", "select")
+        # 2. Program Type
+        add_property(db_name, "Program Type", "select")
         # 3. Start Date
         add_property(db_name, "Start Date", "date")
         # 4. End Date
         add_property(db_name, "End Date", "date")
-        # 5. Duration (Days) - Formula
-        # Notion API does not support formulas directly; must be added manually in UI
-        # 6. Program Type
-        add_property(db_name, "Program Type", "select")
-        # 7. Parent Event
-        # Must be added manually in UI (relation)
-        # 8. Participants
-        # Must be added manually in UI (relation)
-        # 9. Tasks (Cohort-Level)
-        # Must be added manually in UI (relation)
-        # 10. Communication Log
-        # Must be added manually in UI (relation)
-        # 11. Folder Path
-        add_property(db_name, "Folder Path", "text")
-        # 12. Cloud Folder
-        add_property(db_name, "Cloud Folder", "text")
-        # 13. Notes
-        add_property(db_name, "Notes", "text")
-        print("All required properties for IndigiRise Cohorts (Master) added. Add relations and formula manually in Notion UI.")
+        # 5. Notes
+        add_property(db_name, "Notes", "rich_text")
+        # 6. Folder Path
+        add_property(db_name, "Folder Path", "url")
+        # 7. Cloud Folder
+        add_property(db_name, "Cloud Folder", "url")
+        # 8. Participants (relation)
+        add_relation_property(db_name, "Participants", "IndigiRise Participants (Master)")
+        # 9. Events (relation)
+        add_relation_property(db_name, "Events", "IPE Events (Master)")
+        # 10. Tasks (relation)
+        add_relation_property(db_name, "Tasks", "IPE Tasks (Master)")
+        # 11. Communication Log (relation)
+        add_relation_property(db_name, "Communication Log", "IPE Communication Log (Master)")
+        print("All properties for IndigiRise Cohorts (Master) added. Add formulas manually in Notion UI if needed.")
         return
     if not args:
         print("Missing Notion action.")
