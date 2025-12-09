@@ -2,6 +2,8 @@ import os
 import click
 from core.dispatcher import dispatch_command
 from commands.ipe_os import build_ipe_os
+from src.commands import auth
+from src.commands import obs
 
 @click.command()
 @click.argument("command", nargs=-1)
@@ -71,3 +73,7 @@ def cli(command):
 
 if __name__ == "__main__":
     cli()
+    # Register auth CLI
+    auth.auth()
+    # Register obs CLI
+    obs.obs()
