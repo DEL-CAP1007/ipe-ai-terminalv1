@@ -9,7 +9,7 @@ class Identity:
     email: Optional[str] = None
     name: Optional[str] = None     # for service accounts
 
-def get_current_identity(db, session_id) -> Identity | None:
+def get_current_identity(db, session_id) -> Optional[Identity]:
     from services.auth.service import AuthService
     raw = AuthService.get_identity_from_session(db, session_id)
     if not raw:

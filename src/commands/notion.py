@@ -6,6 +6,7 @@ from pathlib import Path
 from core.llm import ask_ai
 from commands.filesystem import sync_folder, CLOUD_ROOT, create_onboarding_folders, create_speaker_folders, create_k12_folders, create_event_folders
 from commands.notion_helpers import update_folder_path
+from services.secret.runtime import get_secret_value
 def update_page_content(page_id, new_content, dry_run=False):
     """
     Replace the content blocks of a Notion page with new_content (as paragraphs).
@@ -161,7 +162,7 @@ def create_task(task_name, parent_page_id, timeline_start=None, timeline_end=Non
 NOTION_VERSION = "2022-06-28"
 BASE_URL = "https://api.notion.com/v1"
 NOTION_ROOT_PAGE = os.environ.get("NOTION_ROOT_PAGE", "YOUR_ROOT_PAGE_ID")
-NOTION_TOKEN = os.environ.get("NOTION_TOKEN", "YOUR_NOTION_TOKEN")
+NOTION_TOKEN = get_secret_value("NOTION_TOKEN")
 headers = {
     "Authorization": f"Bearer {NOTION_TOKEN}",
     "Content-Type": "application/json",

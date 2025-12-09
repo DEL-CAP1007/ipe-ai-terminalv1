@@ -2,8 +2,12 @@ import os
 import click
 from core.dispatcher import dispatch_command
 from commands.ipe_os import build_ipe_os
+from src.commands import roles
 from src.commands import auth
 from src.commands import obs
+from src.commands import secret
+from src.commands import token
+from src.commands import audit
 
 @click.command()
 @click.argument("command", nargs=-1)
@@ -73,7 +77,15 @@ def cli(command):
 
 if __name__ == "__main__":
     cli()
+    # Register roles CLI
+    roles.roles()
     # Register auth CLI
     auth.auth()
     # Register obs CLI
     obs.obs()
+    # Register secret CLI
+    secret.register_secret_commands(roles)
+    # Register token CLI
+    token.register_token_commands(roles)
+    # Register audit CLI
+    audit.register_audit_commands(roles)

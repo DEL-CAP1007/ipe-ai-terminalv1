@@ -25,6 +25,17 @@ class RelationshipService:
             to_canonical=to_entity.canonical_id,
             relation_type=relation_type,
         )
+            from services.audit.service import AuditService
+            AuditService.log(
+                db,
+                identity=None,  # Pass actual identity if available
+                action="entity.relation.add",
+                target_type="entity",
+                target_id=str(from_entity.id),
+                target_label=f"{from_entity.entity_type}:{from_entity.id}",
+                metadata={"to_entity": str(to_entity.id), "relation_type": relation_type},
+                status="success",
+            )
         db.add(rel)
         db.commit()
         RelationshipService.create_inverse_relation_if_needed(db, rel)

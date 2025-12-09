@@ -159,6 +159,19 @@ def run_workflow(workflow_name, *args):
         "followup-event": workflow_followup_event,
         "full-event-schedule": workflow_full_event_schedule
     }
+        from db.session import get_session
+        from services.audit.service import AuditService
+        with get_session() as db:
+            AuditService.log(
+                db,
+                identity=None,  # Pass actual identity if available
+                action="pipeline.run",
+                target_type="pipeline",
+                target_id=workflow_name,
+                target_label=workflow_name,
+                metadata={"args": args},
+                status="success",
+            )
     if workflow_name not in workflows:
         print(f"[ERROR] Unknown workflow: {workflow_name}")
         print(f"Available workflows: {list(workflows.keys())}")

@@ -14,7 +14,7 @@ class SyncManager:
         else:
             self.index_builder = None
 
-    def sync(self, mode="full", table=None):
+    def sync(self, mode="full", table=None, identity=None):
         """Run a sync cycle. mode: 'full' or 'fast'. table: restrict to one table."""
         # Pull from Notion and T7
         notion_data = self.notion.pull(table=table)
@@ -61,6 +61,22 @@ class SyncManager:
         if self.db_session:
             from services.telemetry_repository import TelemetryRepository
             TelemetryRepository.add(self.db_session, 'sync_jobs', 1, __import__('datetime').datetime.utcnow(), {'mode': mode, 'table': table})
+            # Audit log
+            try:
+                from services.audit.service import AuditService
+                job_summary = {k: len(v) for k, v in resolved.items()}
+                AuditService.log(
+                    self.db_session,
+                    identity=identity,
+                    action="sync.run",
+                    target_type="system",
+                    target_id="sync_engine",
+                    target_label=f"mode={mode}, table={table}",
+                    metadata={"job_summary": job_summary},
+                    status="success",
+                )
+            except Exception:
+                pass
         return resolved
 
     def diff(self, table=None):

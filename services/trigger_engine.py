@@ -34,7 +34,7 @@ class TriggerEngine:
             TriggerEngine.execute_action(db, trigger, event_type, payload)
 
     @staticmethod
-    def execute_action(db: Session, trigger: Trigger, event_type: str, payload: dict):
+    def execute_action(db: Session, trigger: Trigger, event_type: str, payload: dict, identity=None):
         run = TriggerRun(
             trigger_id=trigger.id,
             event_type=event_type,
@@ -49,6 +49,7 @@ class TriggerEngine:
         context['db'] = db
         context['trigger'] = trigger
         context['run'] = run
+        error_message = None
         try:
             if trigger.action:
                 exec(trigger.action, {}, context)
@@ -56,8 +57,25 @@ class TriggerEngine:
         except Exception as e:
             run.status = 'error'
             run.error_message = str(e)
+            error_message = str(e)
         run.finished_at = datetime.datetime.utcnow()
         db.commit()
         # Telemetry hook
         from services.telemetry_repository import TelemetryRepository
         TelemetryRepository.add(db, 'trigger_runs', 1, datetime.datetime.utcnow(), {'trigger_id': trigger.id, 'status': run.status})
+        # Audit log
+        try:
+            from services.audit.service import AuditService
+            AuditService.log(
+                db,
+                identity=identity,
+                action="trigger.fire",
+                target_type="trigger",
+                target_id=str(trigger.id),
+                target_label=trigger.name,
+                metadata={"event_type": event_type, "event_payload": payload},
+                status=run.status,
+                error_message=error_message,
+            )
+        except Exception:
+            pass

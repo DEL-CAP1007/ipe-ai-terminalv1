@@ -85,7 +85,19 @@ def update_index_for_entity(entity):
     index_record = build_index_record(entity)
     # Remove old index for this entity_id
     global entity_index_db
-    entity_index_db = [r for r in entity_index_db if r.entity_id != index_record.entity_id]
+        entity_index_db = [r for r in entity_index_db if r.entity_id != index_record.entity_id]
+        from services.audit.service import AuditService
+        # You may need to pass db/session/identity if available
+        AuditService.log(
+            None,
+            identity=None,
+            action="entity.index.update",
+            target_type="entity",
+            target_id=str(entity.id),
+            target_label=f"{getattr(entity, 'entity_type', '')}:{entity.id}",
+            metadata={},
+            status="success",
+        )
     entity_index_db.append(index_record)
 
 # Query engine
