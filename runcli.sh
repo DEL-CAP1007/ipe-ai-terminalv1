@@ -237,6 +237,11 @@ if [ "$1" = "ops.queue" ]; then
 	exec "$PYTHON_BIN" scripts/ops_queue.py "$@"
 fi
 
+if [ "$1" = "ops.sync.tasks" ]; then
+	shift
+	exec "$PYTHON_BIN" scripts/sync_notion_tasks_state.py "$@"
+fi
+
 if [ "$1" = "ops.brief" ]; then
 	shift
 	exec "$PYTHON_BIN" scripts/run_brief.py "$@"
